@@ -46,21 +46,27 @@ v `shuffle()`. Rotaci vynášejícího mezi hrami řeší [js/ui.js](../js/ui.js
 `playCard()` po každé kartě aktualizuje `trick.holder`. `legalMoves()` hráčům, kteří
 nevynášejí, povolí celou ruku.
 
-### 4. Pokračování (přebíjení)
+### 4. Otočení kola (pokračování)
 
 Když všichni zahráli po jedné kartě:
 
-- Pokud štych drží **soupeřova strana** a vynášející má v ruce kartu **hodnoty štychu
-  nebo sedmu**, smí se rozhodnout **pokračovat**. Zahraje takovou kartu (jinou nesmí)
-  a všichni ostatní znovu přidají po jedné libovolné kartě. Toto se může opakovat.
-- Jinak (nebo když se vynášející rozhodne nepokračovat) štych končí a bere ho jeho
-  aktuální držitel.
-- Pokud štych drží vynášející nebo jeho partner, štych končí automaticky.
+- Pokud má vynášející v ruce další kartu **hodnoty štychu nebo sedmu**, smí
+  **otočit kolo**. Zahraje takovou kartu (jinou nesmí) a všichni ostatní znovu přidají
+  po jedné libovolné kartě. Kolo lze otáčet **opakovaně**, dokud má vynášející
+  takovou kartu.
+- Kolo jde otočit **bez ohledu na to, kdo štych právě drží**. Když ho drží soupeř,
+  vynášející se ho snaží získat zpět. Když ho drží jeho strana, vytahuje ze soupeřů
+  další karty, třeba esa a desítky.
+- Když vynášející žádnou takovou kartu nemá nebo se rozhodne nepokračovat, štych končí
+  a bere ho jeho aktuální držitel.
 
-**Implementace:** po dokončení kola `playCard()` zavolá `canContinue()`. Když vrátí
-`true`, hra přejde do fáze `decide` a vynášející volá `decide(state, true|false)`.
-Při pokračování se zvýší `trick.round` a `legalMoves()` vynášejícímu povolí jen karty,
-pro které platí `beats()`. V UI se zobrazí tlačítka *Pokračovat* / *Nechat štych*.
+**Implementace:** po dokončení kola `playCard()` zavolá `canContinue()`, které jen
+zjistí, zda má vynášející kartu, pro kterou platí `beats()`. Když ano, hra přejde do
+fáze `decide` a vynášející volá `decide(state, true|false)`. Při pokračování se zvýší
+`trick.round` a `legalMoves()` vynášejícímu povolí jen karty, pro které platí
+`beats()`. V UI se karty, kterými lze otočit kolo, zvýrazní a kliknutím na ni se kolo
+rovnou otočí i zahraje (`decide(true)` a `playCard()` v jednom kroku). Tlačítko *Nechat
+štych* (nebo *Vzít štych*, když štych drží vaše strana) kolo ukončí.
 
 ### 5. Po štychu a dobírání
 
@@ -96,9 +102,9 @@ Do skóre zápasu se hra počítá takto:
 **Implementace:** `cardPoints()`, `teamPoints()` (přičte bonus za poslední štych)
 a `computeResult()` vrací `{ points, winner, stake }`.
 
-> Poznámka k variantám: v některých hospodách se hraje bez pokračování, s jiným
-> bodováním výhry („bez bodů“ / „bez štychu“), nebo smí pokračovat i vynášející, který
-> štych drží. Tato hra se drží nejběžnější varianty popsané výše.
+> Poznámka k variantám: v některých hospodách se hraje bez otáčení kola, s jiným
+> bodováním výhry („bez bodů“ / „bez štychu“), nebo smí otočit kolo jen ten, kdo štych
+> prohrává. Tato hra se drží nejběžnější varianty popsané výše.
 
 ### 7. Umělá inteligence
 
@@ -114,12 +120,14 @@ svou ruku, karty na stole a karty z již sebraných štychů.
   ani sedmu.
 - **„Mazání“:** když štych drží partner, hraje jako poslední a nikdo ho už nemůže
   přebít, přidá do štychu eso nebo desítku.
-- **Pokračování:** pokračuje, má-li levnou kartu stejné hodnoty, nebo sedmu, když jsou
-  ve štychu body.
+- **Otočení kola:** když štych drží soupeř, pokračuje kartou stejné hodnoty, nebo
+  sedmou, jsou-li ve štychu body. Když štych drží jeho strana, otočí kolo jen kartou
+  stejné hodnoty, nikdy sedmou. V simulacích to vyhrává zhruba 52 % her proti AI, která
+  vlastní štych nikdy neotáčí, a 53–58 % proti AI, která k tomu používá i sedmy.
 - Ke konci hry počítá s bonusem 10 bodů za poslední štych.
 
 Testy v [tests/engine.test.js](../tests/engine.test.js) ověřují, že AI vyhrává proti
-náhodnému hráči výrazně přes 60 % her (aktuálně asi 95 % ve hře 1 × 1 a 85 % ve hře 2 × 2).
+náhodnému hráči výrazně přes 60 % her (aktuálně asi 91 % ve hře 1 × 1 a 82 % ve hře 2 × 2).
 
 ### 8. Průběh hry v UI
 
@@ -169,21 +177,28 @@ The deck is shuffled and everyone gets **4 cards**. The rest forms the **stock**
 `playCard()` updates `trick.holder` after each card. `legalMoves()` gives non-leading
 players their whole hand.
 
-### 4. Continuing the trick
+### 4. Turning the round ("otočit kolo")
 
 When everyone has played one card:
 
-- If the **opposing side** holds the trick and the leader still has a card of the
-  **trick rank or a seven**, the leader may **continue**. They must play such a card,
-  and everyone else adds one more card of their choice. This can repeat.
-- Otherwise, or if the leader declines, the trick ends and goes to its current holder.
-- If the leader or their partner holds the trick, it ends automatically.
+- If the leader still has a card of the **trick rank or a seven**, they may **turn the
+  round** (continue). They must play such a card, and everyone else adds one more card
+  of their choice. The round can be turned **again and again** as long as the leader
+  still has such a card.
+- This is allowed **no matter who currently holds the trick**. If the opponents hold
+  it, the leader tries to win it back. If the leader's side holds it, continuing pulls
+  more cards, possibly aces and tens, out of the opponents' hands.
+- If the leader has no such card, or declines, the trick ends and goes to its current
+  holder.
 
-**Implementation:** after a full round, `playCard()` calls `canContinue()`. If it
-returns `true`, the game enters the `decide` phase and the leader calls
-`decide(state, true|false)`. Continuing increments `trick.round`, and `legalMoves()`
-then restricts the leader to cards for which `beats()` is true. The UI shows
-*Continue* / *Give up the trick* buttons.
+**Implementation:** after a full round, `playCard()` calls `canContinue()`, which only
+checks whether the leader has a card for which `beats()` is true. If so, the game
+enters the `decide` phase and the leader calls `decide(state, true|false)`. Continuing
+increments `trick.round`, and `legalMoves()` then restricts the leader to beating
+cards. In the UI the cards that can turn the round are highlighted, and clicking one
+turns the round and plays it in a single step (`decide(true)` followed by
+`playCard()`). The *Give up the trick* button (*Take the trick* when your side holds
+it) ends the round instead.
 
 ### 5. After the trick: drawing
 
@@ -219,9 +234,9 @@ The game counts towards the match score as follows:
 **Implementation:** `cardPoints()`, `teamPoints()` (adds the last-trick bonus), and
 `computeResult()`, which returns `{ points, winner, stake }`.
 
-> Variants: some groups play without continuing, score wins differently, or let a
-> leader who already holds the trick continue anyway. This game uses the common
-> variant described above.
+> Variants: some groups play without turning the round, score wins differently, or
+> only let a leader who is losing the trick continue. This game uses the common variant
+> described above.
 
 ### 7. Computer player
 
@@ -237,12 +252,15 @@ hand, the cards on the table, and cards already taken in earlier tricks.
   never an ace, ten or seven if it can avoid it.
 - **Smearing:** when its partner holds the trick, it plays last, and nobody can beat the
   trick any more, it adds an ace or ten.
-- **Continuing:** it continues when it has a cheap same-rank card, or a seven when the
-  trick contains points.
+- **Turning the round:** when the opponents hold the trick, it continues with a
+  same-rank card, or with a seven if the trick contains points. When its own side holds
+  the trick, it continues only with a same-rank card, never a seven. In simulations
+  this wins about 52 % of games against an AI that never turns its own trick, and
+  53–58 % against one that also spends sevens on it.
 - Near the end of the game it counts the 10-point last-trick bonus.
 
 [tests/engine.test.js](../tests/engine.test.js) checks that the AI wins clearly more
-than 60 % of games against a random player (currently about 95 % in 1 vs 1 and 85 % in
+than 60 % of games against a random player (currently about 91 % in 1 vs 1 and 82 % in
 2 vs 2).
 
 ### 8. Game flow in the UI

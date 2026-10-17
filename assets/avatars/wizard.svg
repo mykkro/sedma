@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Wizard avatar. Original work for Sedma, MIT licensed. -->
+  <defs><clipPath id="c"><circle cx="50" cy="50" r="48"/></clipPath></defs>
+  <circle cx="50" cy="50" r="48" fill="#3b2a6b"/>
+  <g clip-path="url(#c)">
+    <ellipse cx="50" cy="106" rx="38" ry="30" fill="#3f51b5"/>
+    <circle cx="50" cy="54" r="18" fill="#f1c9a0"/>
+    <path d="M40 46 Q44 43 47 46" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M53 46 Q56 43 60 46" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="44" cy="51" r="2" fill="#222"/>
+    <circle cx="56" cy="51" r="2" fill="#222"/>
+    <path d="M32 56 Q33 90 50 98 Q67 90 68 56 Q60 66 50 64 Q40 66 32 56 Z" fill="#f2f2f2" stroke="#cfcfcf" stroke-width="1"/>
+    <path d="M40 62 Q45 58 50 61 Q55 58 60 62 Q55 64 50 63 Q45 64 40 62 Z" fill="#fff" stroke="#cfcfcf" stroke-width="0.8"/>
+    <path d="M42 74 Q46 80 44 88 M58 74 Q54 80 56 88 M50 70 L50 90" fill="none" stroke="#d6d6d6" stroke-width="1.2"/>
+    <path d="M29 40 L54 2 L60 14 L71 40 Z" fill="#3949ab" stroke="#26307a" stroke-width="1.5"/>
+    <ellipse cx="50" cy="40" rx="27" ry="6" fill="#2a3990" stroke="#1d2766" stroke-width="1.5"/>
+    <path d="M45 20 l1.6 3.4 3.6 .4 -2.7 2.4 .8 3.6 -3.3 -1.9 -3.3 1.9 .8 -3.6 -2.7 -2.4 3.6 -.4 z" fill="#f2c94c"/>
+    <circle cx="58" cy="30" r="1.8" fill="#f2c94c"/>
+    <circle cx="40" cy="33" r="1.3" fill="#f2c94c"/>
+  </g>
+  <circle cx="50" cy="50" r="47" fill="none" stroke="#ffffff55" stroke-width="2"/>
+</svg>

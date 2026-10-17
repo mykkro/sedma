@@ -20,6 +20,7 @@ a bez serveru.
 - čeština a angličtina (přepínač CZ / EN)
 - počítání bodů, štychů a skóre zápasu (1 / 2 / 3 body za hru)
 - funguje i na mobilu
+- každý hráč má svůj avatar: rytíř (vy), čaroděj, elfí hraničář, král a trpaslík
 
 ### Jak hrát
 
@@ -29,9 +30,12 @@ a bez serveru.
    # nebo
    python -m http.server
    ```
-2. Vyberte režim a balíček v horní liště, klikněte na **Nová hra**.
-3. Karty, které smíte zahrát, jsou zvýrazněné zlatě. Když štych drží soupeř a vy jste
-   vynášeli, zobrazí se tlačítka **Pokračovat** / **Nechat štych**.
+2. V menu (☰ vpravo nahoře) vyberte režim, balíček a jazyk, případně zapněte průběh hry.
+   Klikněte na **Nová hra**.
+3. Karty, které smíte zahrát, jsou zvýrazněné zlatě. Když jste vynášeli a můžete otočit
+   kolo, stačí kliknout na kartu stejné hodnoty nebo sedmu, nebo na kulaté tlačítko
+   **Otočit kolo** vpravo od karet. Tlačítkem **Nechat štych** (nebo **Vzít štych**)
+   kolo ukončíte.
 
 Užitečné parametry v URL: `?mode=4` (2 × 2), `?lang=en`, `?deck=french`.
 
@@ -40,8 +44,8 @@ Užitečné parametry v URL: `?mode=4` (2 × 2), `?lang=en`, `?deck=french`.
 - Každý dostane 4 karty, zbytek je talon.
 - Barvy nehrají roli. Štych přebije karta **stejné hodnoty** jako první vynesená karta,
   nebo **sedma** (žolík).
-- Štych bere ten, kdo poslední přebil. Pokud štych drží soupeř, může vynášející
-  **pokračovat** další kartou stejné hodnoty nebo sedmou.
+- Štych bere ten, kdo poslední přebil. Po každém kole může vynášející **otočit kolo**,
+  pokud má další kartu stejné hodnoty nebo sedmu, a to i když štych drží jeho strana.
 - Body mají jen **esa a desítky** (10 b.) a **poslední štych** (10 b.) – celkem 90.
 - Po štychu se všichni doberou do 4 karet, vítěz štychu bere první a vynáší.
 
@@ -72,6 +76,7 @@ JavaScript), with nothing to install and no server.
 - Czech and English UI (CZ / EN toggle)
 - points, tricks and match score (1 / 2 / 3 points per game)
 - works on phones
+- every player has an avatar: knight (you), wizard, elf ranger, king and dwarf
 
 ### How to play
 
@@ -81,9 +86,12 @@ JavaScript), with nothing to install and no server.
    # or
    python -m http.server
    ```
-2. Choose the mode and the deck in the top bar and click **New game**.
-3. Cards you may play are outlined in gold. When you led and the opponents hold the
-   trick, the **Continue** / **Give up the trick** buttons appear.
+2. Open the menu (☰, top right) to choose the mode, deck and language, or to show the
+   game log. Click **New game**.
+3. Cards you may play are outlined in gold. When you led and can turn the round, just
+   click a card of the led rank or a seven, or the round **Turn the round** button to the
+   right of your hand. The **Give up the trick** (or **Take the trick**) button ends the
+   round instead.
 
 URL parameters: `?mode=4` (2 vs 2), `?lang=cs`, `?deck=french`.
 
@@ -92,8 +100,9 @@ URL parameters: `?mode=4` (2 vs 2), `?lang=cs`, `?deck=french`.
 - Everyone gets 4 cards; the rest is the stock.
 - Suits don't matter. A card of the **same rank** as the led card, or any **seven**
   (wild), takes over the trick.
-- Whoever beat it last takes the trick. If the opponents hold it, the leader may
-  **continue** with another card of the led rank or a seven.
+- Whoever beat it last takes the trick. After each round the leader may **turn the
+  round** (continue) with another card of the led rank or a seven, even if their own
+  side holds the trick.
 - Only **aces and tens** (10 each) and the **last trick** (10) score: 90 in total.
 - After each trick everybody draws back up to 4 cards. The trick winner draws first
   and leads next.
@@ -116,6 +125,7 @@ js/ai.js              computer player
 js/i18n.js            Czech / English texts
 js/ui.js              rendering and game flow
 assets/cards/         card images (+ CREDITS.md)
+assets/avatars/       player avatars (original, MIT)
 docs/RULES.md         rules and how they are implemented
 tests/                Node tests
 ```

@@ -98,11 +98,11 @@
     return hand.slice();
   }
 
-  /** The leader may continue only when the trick is held by the opposing team
-   *  and the leader still holds a card that beats (lead rank or a seven). */
+  /** After a full round the leader may continue ("otočit kolo") whenever they
+   *  still hold a card that beats (lead rank or a seven) – no matter who
+   *  currently holds the trick. */
   function canContinue(state) {
     const t = state.trick;
-    if (teamOf(state, t.holder) === teamOf(state, t.leader)) return false;
     return state.players[t.leader].hand.some((c) => beats(c, t.leadRank));
   }
 

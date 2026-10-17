@@ -95,7 +95,7 @@ test('leader may give up the trick', () => {
   assert.equal(s.turn, 1);
 });
 
-test('4 players: partner taking the trick does not allow continuation', () => {
+test('leader may turn the round even when their own side holds the trick', () => {
   const s = fixedState([
     [card('srdce', '8'), card('kule', '8')],
     [card('srdce', 'K'), card('kule', 'K')],
@@ -106,7 +106,41 @@ test('4 players: partner taking the trick does not allow continuation', () => {
   E.playCard(s, 1, 'srdce-K');
   E.playCard(s, 2, 'listy-8');
   E.playCard(s, 3, 'zaludy-K');
-  assert.equal(s.trick.holder, 2);
+  assert.equal(s.trick.holder, 2); // partner holds
+  assert.equal(s.phase, 'decide'); // leader still has an 8
+  E.decide(s, true);
+  assert.deepEqual(E.legalMoves(s, 0).map((c) => c.id), ['kule-8']);
+});
+
+test('leader may turn the round repeatedly while they have beating cards', () => {
+  const s = fixedState([
+    [card('srdce', '9'), card('kule', '9'), card('listy', '7')],
+    [card('srdce', '8'), card('kule', '8'), card('listy', '8')],
+  ]);
+  E.playCard(s, 0, 'srdce-9');
+  E.playCard(s, 1, 'srdce-8');
+  assert.equal(s.phase, 'decide'); // own trick, still holds a 9 and a 7
+  E.decide(s, true);
+  E.playCard(s, 0, 'kule-9');
+  E.playCard(s, 1, 'kule-8');
+  assert.equal(s.phase, 'decide'); // still holds the 7
+  E.decide(s, true);
+  assert.deepEqual(E.legalMoves(s, 0).map((c) => c.id), ['listy-7']);
+  E.playCard(s, 0, 'listy-7');
+  E.playCard(s, 1, 'listy-8');
+  assert.equal(s.trick.round, 2);
+  assert.equal(s.phase, 'collect');
+  E.collectTrick(s);
+  assert.equal(s.captured[0].length, 6);
+});
+
+test('without a beating card the trick ends after the round', () => {
+  const s = fixedState([
+    [card('srdce', '8'), card('kule', 'O')],
+    [card('srdce', 'K'), card('kule', 'K')],
+  ]);
+  E.playCard(s, 0, 'srdce-8');
+  E.playCard(s, 1, 'srdce-K');
   assert.equal(s.phase, 'collect');
 });
 

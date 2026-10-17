@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Dwarf avatar. Original work for Sedma, MIT licensed. -->
+  <defs><clipPath id="c"><circle cx="50" cy="50" r="48"/></clipPath></defs>
+  <circle cx="50" cy="50" r="48" fill="#4a4f57"/>
+  <g clip-path="url(#c)">
+    <ellipse cx="50" cy="106" rx="40" ry="30" fill="#7a5230"/>
+    <circle cx="50" cy="54" r="19" fill="#eab48a"/>
+    <circle cx="44" cy="51" r="2" fill="#222"/>
+    <circle cx="56" cy="51" r="2" fill="#222"/>
+    <path d="M40 46 L48 48 M52 48 L60 46" stroke="#a8431a" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M27 56 Q26 94 50 98 Q74 94 73 56 Q64 66 50 63 Q36 66 27 56 Z" fill="#d35400" stroke="#a8431a" stroke-width="1.2"/>
+    <path d="M38 64 Q44 59 50 62 Q56 59 62 64 Q56 67 50 65 Q44 67 38 64 Z" fill="#b84a00"/>
+    <ellipse cx="50" cy="58" rx="4.5" ry="4" fill="#d9946a"/>
+    <path d="M44 72 Q42 82 45 92 M56 72 Q58 82 55 92" fill="none" stroke="#a8431a" stroke-width="1.4"/>
+    <circle cx="45" cy="92" r="2" fill="#c9a227"/><circle cx="55" cy="92" r="2" fill="#c9a227"/>
+    <path d="M31 40 Q16 38 12 18 Q22 30 33 32 Z" fill="#efe6d0" stroke="#b9ad90" stroke-width="1.2"/>
+    <path d="M69 40 Q84 38 88 18 Q78 30 67 32 Z" fill="#efe6d0" stroke="#b9ad90" stroke-width="1.2"/>
+    <path d="M30 44 Q30 24 50 24 Q70 24 70 44 Z" fill="#9aa3ad" stroke="#5f666d" stroke-width="1.5"/>
+    <rect x="29" y="40" width="42" height="6" rx="2" fill="#7d858d" stroke="#5f666d" stroke-width="1"/>
+    <path d="M50 24 L50 40" stroke="#5f666d" stroke-width="1.5"/>
+    <g fill="#5f666d"><circle cx="35" cy="43" r="1"/><circle cx="43" cy="43" r="1"/><circle cx="57" cy="43" r="1"/><circle cx="65" cy="43" r="1"/></g>
+  </g>
+  <circle cx="50" cy="50" r="47" fill="none" stroke="#ffffff55" stroke-width="2"/>
+</svg>

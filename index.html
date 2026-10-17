@@ -15,6 +15,12 @@
       <span class="subtitle" data-i18n="subtitle"></span>
     </div>
     <div class="controls">
+      <button id="new-game" class="primary" data-i18n="newGame"></button>
+      <button id="menu-btn" class="icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="menu" class="menu" hidden>
       <label><span data-i18n="mode"></span>
         <select id="mode">
           <option value="2" data-i18n="mode2"></option>
@@ -27,12 +33,16 @@
           <option value="french" data-i18n="deckFrench"></option>
         </select>
       </label>
-      <div class="lang" role="group" aria-label="Language">
-        <button class="lang-btn" data-lang="cs">CZ</button>
-        <button class="lang-btn" data-lang="en">EN</button>
+      <div class="menu-row"><span data-i18n="language"></span>
+        <div class="lang" role="group" aria-label="Language">
+          <button class="lang-btn" data-lang="cs">CZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
       </div>
+      <label class="check"><input type="checkbox" id="show-log"> <span data-i18n="showLog"></span></label>
       <button id="rules-btn" data-i18n="rules"></button>
-      <button id="new-game" class="primary" data-i18n="newGame"></button>
+      <p class="credits">Card art: German suited © Gunter Gerhardt (CC BY-SA 3.0), French suited by Dmitry Fomin (CC0) –
+        <a href="assets/cards/CREDITS.md">credits</a>.</p>
     </div>
   </header>
 
@@ -53,23 +63,19 @@
 
     <section id="seat-bottom" class="seat seat-bottom">
       <div id="status" class="status" aria-live="polite"></div>
-      <div id="decide" class="decide" hidden>
-        <button id="btn-continue" class="primary" data-i18n="continueBtn"></button>
-        <button id="btn-stop" data-i18n="stopBtn"></button>
+      <div class="player-row">
+        <div class="seat-name"></div>
+        <div class="hand"></div>
+        <div id="actions" class="actions"></div>
       </div>
-      <div class="hand"></div>
-      <div class="seat-name"></div>
     </section>
   </main>
 
-  <details class="log">
-    <summary data-i18n="log"></summary>
+  <aside id="log" class="log" hidden>
+    <div class="log-head"><span data-i18n="log"></span>
+      <button id="log-close" class="icon-btn small" aria-label="×">×</button></div>
     <ul id="log-list"></ul>
-  </details>
-
-  <footer class="footer">
-    Card art: German suited by Gunter Gerhardt (CC BY-SA 3.0), French suited by Dmitry Fomin (CC0) – see <a href="assets/cards/CREDITS.md">credits</a>.
-  </footer>
+  </aside>
 
   <dialog id="rules">
     <h2 data-i18n="rules"></h2>

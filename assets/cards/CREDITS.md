@@ -27,6 +27,6 @@ Obrázky karet **nespadají** pod MIT licenci projektu, každá sada má svou p�
   [skaat-deck](https://github.com/nikku/skaat-deck) (MIT). Files renamed to `<suit>-<rank>.svg`
   (`heart`→`srdce`, `spade`→`listy`, `diamond`→`kule`, `club`→`zaludy`).
 
-## Card back (`back.svg`)
+## Card back (`back.svg`) and player avatars (`../avatars/`)
 
 Original work made for this project, MIT licensed like the code.

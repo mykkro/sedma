@@ -108,6 +108,11 @@
     const matching = hand.filter((c) => c.rank === t.leadRank && !isSeven(c));
     const sevens = hand.filter(isSeven);
     const value = trickValue(state, me);
+    if (E.teamOf(state, t.holder) === E.teamOf(state, me)) {
+      // Our trick already: turn the round again with a spare lead-rank card
+      // (it pulls more cards out of the opponents' hands), never with a seven.
+      return matching.length > 0;
+    }
     if (matching.length) return true;
     if (sevens.length && value >= 10) return true;
     return false;

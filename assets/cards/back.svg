@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="280" viewBox="0 0 180 280">
+  <!-- Card back for Sedma. Original work, MIT licensed with the project. -->
+  <defs>
+    <pattern id="p" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="20" height="20" fill="#8b1e2d"/>
+      <rect x="0" y="0" width="10" height="10" fill="#a8293b"/>
+      <rect x="10" y="10" width="10" height="10" fill="#a8293b"/>
+    </pattern>
+  </defs>
+  <rect x="1" y="1" width="178" height="278" rx="12" fill="#fdfaf2" stroke="#333" stroke-width="2"/>
+  <rect x="11" y="11" width="158" height="258" rx="7" fill="url(#p)" stroke="#d9b44a" stroke-width="3"/>
+  <ellipse cx="90" cy="140" rx="38" ry="52" fill="#fdfaf2" stroke="#d9b44a" stroke-width="3"/>
+  <text x="90" y="160" font-family="Georgia, serif" font-size="58" font-weight="bold" text-anchor="middle" fill="#8b1e2d">7</text>
+</svg>

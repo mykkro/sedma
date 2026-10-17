@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sedma</title>
+  <meta name="description" content="Sedma – Czech card game for 2 or 4 players in the browser / česká karetní hra v prohlížeči">
+  <link rel="icon" href="assets/cards/back.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1 data-i18n="title">Sedma</h1>
+      <span class="subtitle" data-i18n="subtitle"></span>
+    </div>
+    <div class="controls">
+      <label><span data-i18n="mode"></span>
+        <select id="mode">
+          <option value="2" data-i18n="mode2"></option>
+          <option value="4" data-i18n="mode4"></option>
+        </select>
+      </label>
+      <label><span data-i18n="deck"></span>
+        <select id="deck">
+          <option value="german" data-i18n="deckGerman"></option>
+          <option value="french" data-i18n="deckFrench"></option>
+        </select>
+      </label>
+      <div class="lang" role="group" aria-label="Language">
+        <button class="lang-btn" data-lang="cs">CZ</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <button id="rules-btn" data-i18n="rules"></button>
+      <button id="new-game" class="primary" data-i18n="newGame"></button>
+    </div>
+  </header>
+
+  <main id="table" class="table mode-2">
+    <section id="seat-top" class="seat seat-top"><div class="seat-name"></div><div class="hand"></div></section>
+    <section id="seat-left" class="seat seat-left" hidden><div class="seat-name"></div><div class="hand"></div></section>
+
+    <section class="center">
+      <div class="talon">
+        <div id="talon-pile" class="talon-pile"></div>
+        <div id="talon-count" class="talon-count"></div>
+      </div>
+      <div id="trick" class="trick" aria-live="polite"></div>
+      <div id="score" class="score"></div>
+    </section>
+
+    <section id="seat-right" class="seat seat-right" hidden><div class="seat-name"></div><div class="hand"></div></section>
+
+    <section id="seat-bottom" class="seat seat-bottom">
+      <div id="status" class="status" aria-live="polite"></div>
+      <div id="decide" class="decide" hidden>
+        <button id="btn-continue" class="primary" data-i18n="continueBtn"></button>
+        <button id="btn-stop" data-i18n="stopBtn"></button>
+      </div>
+      <div class="hand"></div>
+      <div class="seat-name"></div>
+    </section>
+  </main>
+
+  <details class="log">
+    <summary data-i18n="log"></summary>
+    <ul id="log-list"></ul>
+  </details>
+
+  <footer class="footer">
+    Card art: German suited by Gunter Gerhardt (CC BY-SA 3.0), French suited by Dmitry Fomin (CC0) – see <a href="assets/cards/CREDITS.md">credits</a>.
+  </footer>
+
+  <dialog id="rules">
+    <h2 data-i18n="rules"></h2>
+    <div id="rules-body"></div>
+    <button id="rules-close" class="primary" data-i18n="close"></button>
+  </dialog>
+
+  <dialog id="over">
+    <h2 id="over-title"></h2>
+    <p id="over-text"></p>
+    <button id="next-game" class="primary" data-i18n="nextGame"></button>
+  </dialog>
+
+  <script src="js/engine.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>

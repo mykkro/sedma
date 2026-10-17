@@ -1,0 +1,11 @@
+{
+  "name": "sedma",
+  "version": "1.0.0",
+  "description": "Sedma – Czech card game for the browser (1 vs 1 or 2 vs 2 against the computer)",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/engine.test.js",
+    "start": "npx --yes http-server -c-1 ."
+  }
+}
